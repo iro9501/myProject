@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.springboot.project.dao.IProductDAO">
+	<select id="pListDAO" resultType="com.springboot.project.dto.ProductDTO">
+		select * from product order by pcode
+	</select>
+	<select id="oneOfPListDAO" resultType="com.springboot.project.dto.ProductDTO">
+		select * from product where pcode = #{param1}
+	</select>
+	<insert id="pInsertDAO">
+		insert into product
+		 values('B'||LPAD(product_seq.nextval,5,'0'),#{pname},#{price},#{author},#{publisher},
+		 		#{releasedate},#{description},#{category},#{stock},#{condition},
+		 		sysdate,#{imgname},#{mcode,jdbcType=VARCHAR})
+	</insert>
+	<delete id="pDeleteDAO">
+		delete from product where pcode = #{param1}
+	</delete>
+	<update id="pUpdateDAO">
+		update product
+		 set pname = #{pname}, price = #{price}, author = #{author}, publisher = #{publisher},
+		 	 releasedate = #{releasedate}, description = #{description}, category = #{category}, 
+		 	 stock = #{stock}, condition = #{condition}, imgname = #{imgname}
+		 where pcode = #{pcode}
+	</update>
+</mapper>
